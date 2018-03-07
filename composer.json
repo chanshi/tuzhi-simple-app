@@ -1,6 +1,14 @@
 {
     "name":"tuzhi/simple-app",
     "license":"MIT",
+    "authors":[
+        {
+            "name":"chanshi",
+            "email":"wuse@chanshi.me",
+            "homepage":"http://chanshi.me",
+            "role":"Developer"
+        }
+    ],
     "require": {
         "tuzhi/tuzhi-simple": "dev-master",
         "symfony/polyfill-mbstring" : "v1.7.0"
