@@ -15,5 +15,10 @@
         "php": ">=7.0.2",
         "tuzhi/tuzhi-simple": "dev-master",
         "symfony/polyfill-mbstring" : "v1.7.0"
+    },
+    "autoload": {
+        "psr-s": {
+            "app\\": "app"
+        }
     }
 }
