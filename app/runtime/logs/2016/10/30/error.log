@@ -1,0 +1,16 @@
+[11:11:44] Exception: Not Found Method In Application in /webroot/cs.tuzhi-simple.ts/support/Application.php:258
+Stack trace:
+#0 /webroot/cs.tuzhi-simple.ts/support/Router.php(64): support\Application::__callStatic('user', Array)
+#1 /webroot/cs.tuzhi-simple.ts/support/Application.php(204): support\Router->handler(Object(support\Request))
+#2 [internal function]: support\Application::run()
+#3 /webroot/cs.tuzhi-simple.ts/support/Facade.php(33): call_user_func_array(Array, Array)
+#4 /webroot/wb.weixin.new/public/index.php(30): support\Facade::__callStatic('run', Array)
+#5 {main}
+[11:11:47] Exception: Not Found Method In Application in /webroot/cs.tuzhi-simple.ts/support/Application.php:258
+Stack trace:
+#0 /webroot/cs.tuzhi-simple.ts/support/Router.php(64): support\Application::__callStatic('user', Array)
+#1 /webroot/cs.tuzhi-simple.ts/support/Application.php(204): support\Router->handler(Object(support\Request))
+#2 [internal function]: support\Application::run()
+#3 /webroot/cs.tuzhi-simple.ts/support/Facade.php(33): call_user_func_array(Array, Array)
+#4 /webroot/wb.weixin.new/public/index.php(30): support\Facade::__callStatic('run', Array)
+#5 {main}
