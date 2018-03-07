@@ -14,10 +14,5 @@
     "require": {
         "php": ">=7.0.2",
         "tuzhi/tuzhi-simple": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {
-            "app\\": "app"
-        }
     }
 }
