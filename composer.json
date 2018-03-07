@@ -1,0 +1,6 @@
+{
+    "require": {
+        "tuzhi/tuzhi-simple": "dev-master",
+        "symfony/polyfill-mbstring" : "v1.7.0"
+    }
+}
