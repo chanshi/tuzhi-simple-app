@@ -1,6 +1,5 @@
 {
     "name":"tuzhi/tuzhi-simple-app",
-    "license":"MIT",
     "description":"simple php app",
     "keyword":["app"],
     "authors":[
@@ -12,7 +11,8 @@
         }
     ],
     "require": {
-        "php": ">=7.0.2"
+        "php": ">=7.0.2",
+        "tuzhi/tuzhi-simple": "dev-master"
     },
     "autoload": {
         "psr-s": {
