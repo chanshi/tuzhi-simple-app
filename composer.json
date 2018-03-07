@@ -2,6 +2,7 @@
     "name":"tuzhi/tuzhi-simple-app",
     "description":"simple php app",
     "keyword":["app"],
+    "license":"MIT",
     "authors":[
         {
             "name":"chanshi",
@@ -15,7 +16,7 @@
         "tuzhi/tuzhi-simple": "dev-master"
     },
     "autoload": {
-        "psr-s": {
+        "psr-4": {
             "app\\": "app"
         }
     }
