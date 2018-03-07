@@ -1,5 +1,5 @@
 {
-    "name":"tuzhi-simple-app/app",
+    "name":"tuzhi/simple-app",
     "require": {
         "tuzhi/tuzhi-simple": "dev-master",
         "symfony/polyfill-mbstring" : "v1.7.0"
