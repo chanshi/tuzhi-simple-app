@@ -12,9 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0.2",
-        "tuzhi/tuzhi-simple": "dev-master",
-        "symfony/polyfill-mbstring" : "v1.7.0"
+        "php": ">=7.0.2"
     },
     "autoload": {
         "psr-s": {
