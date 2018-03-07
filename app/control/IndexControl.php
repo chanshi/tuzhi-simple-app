@@ -8,7 +8,7 @@
 
 namespace app\control;
 
-use Symfony\Polyfill\Mbstring\Mbstring;
+
 /**
  * Class IndexControl
  * @package app\control
@@ -21,7 +21,6 @@ class IndexControl extends \Control
      */
     public function defaultAction()
     {
-        echo Mbstring::mb_strlen("abc");
         return \View::fetch('index/default');
     }
 }
