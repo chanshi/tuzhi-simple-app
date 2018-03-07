@@ -1,6 +1,8 @@
 {
     "name":"tuzhi/simple-app",
     "license":"MIT",
+    "description":"simple php app",
+    "keyword":["app"],
     "authors":[
         {
             "name":"chanshi",
@@ -10,6 +12,7 @@
         }
     ],
     "require": {
+        "php": ">=7.0.2",
         "tuzhi/tuzhi-simple": "dev-master",
         "symfony/polyfill-mbstring" : "v1.7.0"
     }
