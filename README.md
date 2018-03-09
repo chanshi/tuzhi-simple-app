@@ -308,8 +308,8 @@ foreach( $Model as $index=>$value )
 
 // 关于页码信息 
 /**
- *  可以定义自己的页码处理类（保护类型） 
-    $Model->pagerClass = " "  页码处理类
+ *  可以定义自己的页码处理类
+ *  设置保护属性 pagerClass 
  */
 $Model->Pager 
 
