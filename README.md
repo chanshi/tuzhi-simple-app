@@ -180,9 +180,137 @@ trait UserTrait
 // 引用特性中的查询
 User::queryOfflineId( $userId );
 
+// 常用的查询方式
+// 1. 根据条件查询出一个值
+User::find()->where(['username'=>$this->username])->one();
+
+// 2. 复杂条件的查询
+User::find(['useranme'])
+    ->whereExpression( \DB::Expression(' age > 20 '))
+    ->all();
+    
+// 3.更新
+User::modify()->where('userId'=>1)->update("userName"=>"禅师");
+
+// 4.插入
+User::getNewRecord()->insert(
+  [
+      "userName"=>"禅师",
+      "age"=>18
+  ]);
+
+// 5.删除
+User::delete()->where(['userName'=>"禅师"])->delete();
+
 //直接使用AR中的方法 
 
+// 1.实例化AR 的方法
+$UserModel =  User::load( $value );  // $value 是主键 
+
+// 2.显示 某个值
+$UserModel["userName"]; // 显示 禅师
+
+// 3. 修改某个值
+$UserModel["userName"] = "我是禅师";
+$UserModel->save();
+
+// 4. 删除该实例
+$UserModel->remove(); 
+
+```
+
+### 关于集合模型的定义和应用
+> 主要适用于 多表的关联条件查询
+```php
+class UserManageList extends \Collection
+{
+    /**
+     * @var array  查询参数
+     */
+    protected $attFilter =
+        [
+            'userId',    // 用户ID
+            'userType',  // 账户类型
+            'userName',
+        ];
+
+    /**
+     * @return array
+     */
+    protected function getColumns()
+    {
+        return
+            [
+                'a.uid' ,   //用户ID
+                'a.username' , // 账号
+                'a.ctype' , //用户分组
+                new Expression('e.username as agentName')
+            ];
+    }
 
 
+    public function buildQuery()
+    {
+        $Query = $this->Query;
+
+        $Query->select( $this->getColumns() )
+            ->table(User::tableName(),'a')
+            ->leftJoin(Manager::tableName(),'b','a.mid=b.uid')
+            ->leftJoin(User::tableName(),'f','a.cuid=f.uid');
+
+        $Query->leftjoin(User::tableName(),'e','a.cuid=e.uid');
+
+        // 获取最新的分成
+        $Query->leftjoin(UserDivided::tableName(),'d','a.uid=d.uid AND d.dt="'.date('Y-m-d',strtotime('-1 day')).'"');
+
+        $this->userId
+            ? $Query->where(['a.uid'=>$this->userId])
+            : null;
+
+        $this->userName
+            ? $Query->andLike('a.username','%'.$this->userName.'%')
+            : null;
+
+        // 是否有区间的问题
+        if( is_array($this->userType) ){
+            $Query->andIn('a.ctype',$this->userType);
+        }else{
+            $this->userType
+                ? $Query->where(['a.ctype'=>$this->userType])
+                : null ;
+        }
+
+        // 设置排序
+        $Query->orderBy('a.uid',Query::DESC);
+
+    }
+
+}
+
+// 使用方式 以下代码在控制器中
+
+// 设置查询条件 
+$Model = new UserManageList();
+$Model['userId'] = Request::get('userId','int');
+$Model['userType'] = Request::get('userType','int');
+$Model['userName'] = Request::get('userName');
+// 设置页码
+$Model->setPage( Request::get('page','int',1) ,30);
+// 查询
+$Model->query();
+
+
+// 关于遍历集合的方式
+foreach( $Model as $index=>$value )
+{
+
+}
+
+// 关于页码信息 
+/**
+ *  可以定义自己的页码处理类（保护类型） 
+    $Model->pagerClass = " "  页码处理类
+ */
+$Model->Pager 
 
 ```
