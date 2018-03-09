@@ -387,3 +387,50 @@ class PagerWidget
 <?php echo  new app\resource\widget\PagerWidget($Model->Pager);?>
 
 ```
+
+# 缓存
+
+## 缓存配置
+```php
+return
+    [
+        'cache'=>
+            [
+                'default' => 'file' ,     // 默认使用的缓存 对应 support 下支持的方式
+                'support' =>
+                    [
+                        'file' =>
+                            [
+                                'keyPrefix'  => 'cache_',             // 前缀
+                                'cacheDir'   => '&runtime/cache',     // 文件缓存路径
+                                'fileSuffix' => '.cache'              // 文件后缀
+                            ],
+                        'memcached' =>
+                            [
+                                'keyPrefix' => 'cache_',                    // 前缀
+                                'server' => '@server.memcached.server_1'    // 服务器配置信息 @ 为配置引用
+                            ]
+                    ]
+            ]
+    ];
+    
+```
+
+## 缓存的使用
+```php 
+
+//默认使用
+Cache::set( $key,$value,$expiry=0 );
+Cache::get( $key );
+Cache::delete( $key );
+Cache::increment( $key,$step=1,$expiry = 0);
+Cache::decrement($key,$step=1,$expiry = 0);
+
+// 指定模块使用
+Cache::memcached->set( $key,$value,$expiry=0 );
+Cache::memcached->get( $key );
+Cache::memcached->delete( $key );
+Cache::memcached->increment( $key,$step=1,$expiry = 0);
+Cache::memcached->decrement($key,$step=1,$expiry = 0);
+
+```
