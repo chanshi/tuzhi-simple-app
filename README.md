@@ -299,7 +299,6 @@ $Model->setPage( Request::get('page','int',1) ,30);
 // 查询
 $Model->query();
 
-
 // 关于遍历集合的方式
 foreach( $Model as $index=>$value )
 {
@@ -312,5 +311,74 @@ foreach( $Model as $index=>$value )
  *  设置保护属性 pagerClass 
  */
 $Model->Pager 
+
+```
+
+## 关于视图
+> 主要采用二步视图
+> 具体的模板 参考 项目
+
+```php
+// 二步视图渲染
+View::layout('index/index',
+    [
+        'model'=>$model
+    ]
+);
+
+// 文件直接渲染
+View::fetch('index/index',
+    [
+        'model'=>$model
+    ]
+);
+
+// layout 对应的路径为 resource/layout
+// 视图文件对应的路径   resource/view
+// 支持简单的widget    resource/widget
+
+关于 widget 查看简单的例子
+class PagerWidget
+{
+    public $html;
+
+    public $pager;
+
+    public function __construct( $pager )
+    {
+        $this->pager = $pager;
+        $this->createHtml();
+    }
+
+    public function createHtml()
+    {
+        $html = '';
+        if( $this->pager ){
+            $html .= '<div class="page">';
+            $html .= '<span>( 每页 :'.$this->pager['pageSize'].', 总数 :'.$this->pager['count'].')</span>';
+            $html .= '<a href="'.$this->pager['prev']['url'].'">上一页</a>';
+            foreach($this->pager['list']  as $list){
+                if( $list['selected'] ){
+                    $html .= '<a class="current">'.$list['text'].'</a>';
+                }else{
+                    $html .= '<a href="'.$list['url'].'">'.$list['text'].'</a>';
+                }
+            }
+            $html .= '<a href="'.$this->pager['next']['url'].'">下一页</a>';
+            $html .= '</div>';
+        }
+        $this->html = $html;
+    }
+
+
+    public function __toString()
+    {
+        return $this->html;
+    }
+}
+
+// 对应Collecter 模型中的 页码
+
+<?php echo  new PagerWidget($Model->Pager);?>
 
 ```
