@@ -5,9 +5,11 @@ $ composer create-project --prefer-dist --stability=dev  tuzhi/tuzhi-simple-app 
 $ chmod -R 777 {路径}/app/runtime
 ```
 
+## 注意 
+> 代码 严格按照 PSR-4 规范标准,请在编写时注意严格按照规范编写
+
 ## 配置文件
 > 查看具体文件 config/config.php
-
 
 
 ## 如何创建控制器
@@ -337,7 +339,10 @@ View::fetch('index/index',
 // 视图文件对应的路径   resource/view
 // 支持简单的widget    resource/widget
 
-关于 widget 查看简单的例子
+// 关于 widget 查看简单的例子
+
+name app\resource\widget;
+
 class PagerWidget
 {
     public $html;
@@ -379,6 +384,6 @@ class PagerWidget
 
 // 对应Collecter 模型中的 页码
 
-<?php echo  new PagerWidget($Model->Pager);?>
+<?php echo  new app\resource\widget\PagerWidget($Model->Pager);?>
 
 ```
